@@ -1,0 +1,47 @@
+* {
+    outline: 1px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+body {
+    height: 1920px;
+    width: 1080px;
+    font-family: sans-serif;
+}
+
+header {
+    text-align: center;
+    color: red;
+}
+
+.blink {
+    animation: blink 2.5s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+    
+}
+
+nav {
+    text-align: right;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    cursor: pointer;
+    color:#f3c686;
+}
+
+.dm-serif-text-regular-italic {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: italic;
+}
