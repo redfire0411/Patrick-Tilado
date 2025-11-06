@@ -1,32 +1,513 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Patrick Tilado</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href="./index.css">
-    <script src='main.js'></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Knewave&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Patrick Tilado - Virtual Assistant Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-image: url('./background.jpg'); /* image path */
+            background-size: cover; /* makes image cover the entire page */
+            background-position: center;
+            margin: 0;
+            height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 5px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .profile-pic-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .profile-info h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .profile-info p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .contact-info a:hover {
+            transform: translateY(-3px);
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-top: -50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        section {
+            margin-bottom: 50px;
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .summary {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .skill-category {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .skill-category h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .skill-category ul {
+            list-style: none;
+        }
+        
+        .skill-category li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .skill-category li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .experience-item {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+        }
+        
+        .experience-header {
+            margin-bottom: 15px;
+        }
+        
+        .experience-header h3 {
+            color: #764ba2;
+            font-size: 1.4em;
+            margin-bottom: 5px;
+        }
+        
+        .company {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        .duration {
+            color: #777;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .responsibilities {
+            margin-top: 15px;
+        }
+        
+        .responsibilities li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .responsibilities li:before {
+            content: "∞";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .education-item, .cert-item {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .education-item h3, .cert-item h3 {
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+        
+        .institution {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .video-container {
+            background: #f8f9ff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #000;
+        }
+        
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-placeholder p {
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+        
+        .hobbies {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 30px 20px;
+            }
+            
+            .profile-info h1 {
+                font-size: 2em;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <header class="blink"><b>Under Construction!!!<b></header><br>
-    <!-- add line break -->
-    <nav>
-        <a href="#">Work</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </nav>
-    <!-- add line break -->
-    <br><br><br>
-    
-    <div class="dm-serif-text-regular-italic">
-    <h1>John Patrick Tilado</h1>
-    <p>Virtual Assistant based in Quezon City, Philippines</p>
+    <div class="container">
+        <header>
+            <div class="profile-section">
+                <div class="profile-pic">
+                    <img src="profile-photo.jpg" alt="John Patrick Tilado">
+                    <!-- To use your own photo, replace the line above with:
+                    <img src="your-photo-url.jpg" alt="John Patrick Tilado">
+                    -->
+                </div>
+                <div class="profile-info">
+                    <h1>John Patrick F. Tilado</h1>
+                    <p><span>Versatile Virtual Assistant</span></p>
+                    <div class="contact-info">
+                        <a href="tel:+639311447289">📱 +63 931 144 7289</a>
+                        <a href="mailto:redfire0411@gmail.com">📧 redfire0411@gmail.com</a>
+                        <a>🏡 Quezon City, Philippines</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <section id="summary">
+                <h2>Professional Summary</h2>
+                <div class="summary">
+                    Experienced Virtual Assistant with a robust IT support background bringing over 10 years of combined experience in Customer Service, Technical Support and Virtual Assistant. I specialize in providing comprehensive General Virtual Assistance Services, Social Media Management and HighLevel (GHL) solutions including account setup, funnel building, pipeline management and workflow automation. My unique blend of technical expertise and administrative proficiency allows me to streamline business operations effectively while delivering exceptional support to clients across various industries.
+                </div>
+            </section>
+            
+            <section id="skills">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Technical Skills</h3>
+                        <ul>
+                            <li>HighLevel (GHL) Setup & Automation</li>
+                            <li>Funnel Building & Pipeline Management</li>
+                            <li>CRM Systems Management</li>
+                             <li>Microsoft Office & Google Suite</li>
+                            <li>Web Development (HTML5, CSS3, JavaScript)</li>                                                       
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Virtual Assistance</h3>
+                        <ul>
+                            <li>Administrative Support</li>
+                            <li>Social Media Management</li>
+                            <li>Content Creation & Posting</li>
+                            <li>Product Listing & Optimization</li>
+                            <li>Image Editing & Enhancement</li>
+                            <li>Website Content Management</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Soft Skills</h3>
+                        <ul>
+                            <li>Excellent Communication</li>
+                            <li>Time Management</li>
+                            <li>Problem-Solving & Troubleshooting</li>
+                            <li>Attention to Detail</li>
+                            <li>Client Relationship Management</li>
+                            <li>Adaptability & Quick Learning</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="experience">
+                <h2>Professional Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Product Lister / Social Media Manager</h3>
+                        <div class="company">Virtual Coworker - Companies Estate Sales</div>
+                        <div class="duration">August 2024 – January 2025</div>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>Listed and updated product information on the company website, ensuring completeness of titles, descriptions, specifications, and pricing details</li>
+                        <li>Edited and optimized product images to meet platform standards, significantly improving product visibility and appeal</li>
+                        <li>Created and posted engaging content for the company's Facebook Business Page to promote new sales and product offerings</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Support Technician</h3>
+                        <div class="company">Automate io LLC</div>
+                        <div class="duration">July 2024 – November 2024</div>
+                    </div>
+                    <ul class="responsibilities">
+                        <li>Provided comprehensive general helpdesk support to end-users</li>
+                        <li>Managed user licenses, devices, and applications efficiently</li>
+                        <li>Monitored and mitigated security threats, ensuring system integrity and data protection</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3>Additional Experience Highlights</h3>
+                    </div>
+                    <ul class="responsibilities">
+                        <li><strong>Service Desk Analyst</strong> - Indra Company (Asian Development Bank) | January 2022 – February 2024</li>
+                        <li><strong>Service Desk Analyst</strong> - Unisys Philippines Ltd. (Catholic Health Initiatives) | March 2018 – September 2021</li>
+                        <li><strong>Customer Service Representative</strong> - Concentrix Philippines Inc. (Bell Canada) | February 2016 – March 2018</li>
+                        <li><strong>Technical Support</strong> - Convergys Philippines (AT&T U-verse) | January 2015 – January 2016</li>
+                        <li><strong>Customer Service Representative</strong> - SITEL Philippines (Sears.com) | September 2014 – December 2014</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="education">
+                <h2>Education & Certifications</h2>
+                
+                <div class="education-item">
+                    <h3>Bachelor of Science in Business Administration</h3>
+                    <div class="institution">Romblon State University</div>
+                    <div class="duration">November 2009 – March 2013</div>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Computer Science (Undergraduate Studies)</h3>
+                    <div class="institution">Palawan State University</div>
+                    <div class="duration">June 2008 – October 2008</div>
+                </div>
+            </section>
+            
+            <section id="professional-development">
+                <h2>Professional Development</h2>
+                
+                <div class="cert-item">
+                    <h3>Social Media Management Training</h3>
+                    <div class="institution">Virtuassist | March 2025</div>
+                </div>
+                
+                <div class="cert-item">
+                    <h3>Wing Academy Courses</h3>
+                    <div class="institution">Wing Assistant | May 2024</div>
+                </div>
+                
+                <div class="cert-item">
+                    <h3>Virtual Assistance Training</h3>
+                    <div class="institution">Yokly | April 2024</div>
+                </div>
+                
+                <div class="cert-item">
+                    <h3>Basic Python Programming</h3>
+                    <div class="institution">Bayan Academy | January 2023</div>
+                </div>
+                
+                <div class="cert-item">
+                    <h3>Village88 Web Fundamentals Bootcamp</h3>
+                    <div class="institution">HTML5, CSS3, JavaScript, MySQL, PHP | July 2022</div>
+                </div>
+                
+                <div class="cert-item">
+                    <h3>Intermediate Front-End Web Development (JavaScript)</h3>
+                    <div class="institution">Bayan Academy | February 2022</div>
+                </div>
+                
+                <div class="cert-item">
+                    <h3>Basic Web Development</h3>
+                    <div class="institution">Ground Gurus | January 2022</div>
+                </div>
+            </section>
+            
+            <section id="video">
+                <h2>Introduction Video</h2>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <!-- PLACEHOLDER: Remove this div when adding your video -->
+                        <div class="video-placeholder">
+                        <video controls>
+                        <source src="your-video.mp4" type="video/mp4">Your browser does not support the video tag.</video>
+                    </div>
+                </div>
+            </section>       
+        <footer>
+            <p>&copy; 2025 John Patrick F. Tilado | Virtual Assistant | All Rights Reserved</p>
+        </footer>
     </div>
-
 </body>
 </html>
